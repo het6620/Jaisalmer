@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jaisalmer, 10–13 July — Five Friends, One Desert</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Jost:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
+
+  :root{
+    --sand:#F1E2B8;
+    --sand-deep:#E6C77E;
+    --terracotta:#C1652F;
+    --maroon:#7E1E3C;
+    --gold:#D4AF37;
+    --night:#211530;
+    --night-deep:#160D22;
+    --ink:#3A2A1C;
+    --cream:#FBF4E4;
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+
+  body{
+    background:var(--cream);
+    color:var(--ink);
+    font-family:'Jost', sans-serif;
+    font-weight:400;
+    overflow-x:hidden;
+  }
+
+  h1,h2,h3,.display{ font-family:'Cormorant Garamond', serif; font-weight:600; }
+  .mono{ font-family:'JetBrains Mono', monospace; letter-spacing:0.03em; }
+  a{ color:inherit; }
+  ::selection{ background:var(--terracotta); color:#fff; }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    background:radial-gradient(ellipse at 50% 120%, var(--sand-deep) 0%, var(--sand) 45%, #EAD9A0 70%, var(--night) 100%);
+    overflow:hidden;
+    padding:2rem;
+  }
+  .hero .sun{
+    position:absolute; width:140px; height:140px; border-radius:50%;
+    background:radial-gradient(circle at 35% 35%, #FFF3D0, var(--gold) 60%, var(--terracotta) 100%);
+    box-shadow:0 0 80px 20px rgba(212,175,55,0.5);
+    top:16%; left:50%; transform:translateX(-50%);
+    animation:rise 3s ease-out;
+  }
+  @keyframes rise{ from{ transform:translate(-50%, 120px); opacity:0;} to{ transform:translate(-50%, 0); opacity:1;} }
+  .dunes{
+    position:absolute; bottom:0; left:0; width:100%; height:38%;
+    background:linear-gradient(180deg, transparent 0%, rgba(58,42,28,0.06) 40%, var(--terracotta) 100%);
+    clip-path: polygon(0% 60%, 12% 45%, 28% 58%, 45% 38%, 62% 55%, 80% 40%, 100% 52%, 100% 100%, 0% 100%);
+    opacity:0.85;
+  }
+  .dunes.back{
+    height:30%;
+    background:linear-gradient(180deg, transparent, var(--sand-deep) 100%);
+    clip-path: polygon(0% 70%, 15% 55%, 33% 68%, 50% 48%, 68% 65%, 85% 50%, 100% 62%, 100% 100%, 0% 100%);
+    opacity:0.6;
+  }
+  .hero-eyebrow{
+    font-family:'JetBrains Mono', monospace; text-transform:uppercase;
+    letter-spacing:0.32em; font-size:0.68rem; color:var(--maroon);
+    margin-bottom:1.1rem; z-index:2;
+  }
+  .hero h1{
+    font-size:clamp(3.2rem, 10.5vw, 7.6rem); line-height:0.95;
+    color:var(--ink); z-index:2; letter-spacing:-0.01em;
+  }
+  .hero h1 em{ font-style:italic; color:var(--maroon); }
+  .hero-sub{ z-index:2; margin-top:1.3rem; font-size:1.05rem; color:var(--ink); max-width:38ch; opacity:0.85; }
+
+  .hero-route{
+    z-index:2; margin-top:2.3rem;
+    display:flex; align-items:center; gap:0.7rem;
+    font-family:'JetBrains Mono', monospace; font-size:0.72rem;
+    letter-spacing:0.08em; text-transform:uppercase; color:var(--ink); opacity:0.75;
+  }
+  .hero-route .dash{ width:28px; height:1px; background:currentColor; opacity:0.5; }
+
+  .hero-dates{
+    z-index:2; margin-top:1.6rem; display:flex; gap:2rem; flex-wrap:wrap; justify-content:center;
+    font-family:'JetBrains Mono', monospace; font-size:0.78rem; letter-spacing:0.09em; text-transform:uppercase;
+    color:var(--ink); border-top:1px solid rgba(58,42,28,0.3); border-bottom:1px solid rgba(58,42,28,0.3);
+    padding:0.75rem 0;
+  }
+  .hero-dates span strong{ display:block; font-family:'Cormorant Garamond', serif; font-size:1.3rem; font-weight:700; letter-spacing:0; }
+
+  .scroll-cue{
+    position:absolute; bottom:2rem; z-index:2; font-size:0.62rem; letter-spacing:0.3em;
+    text-transform:uppercase; color:var(--ink); opacity:0.6; animation:bob 2.2s ease-in-out infinite;
+  }
+  @keyframes bob{ 0%,100%{transform:translateY(0);} 50%{transform:translateY(8px);} }
+
+  /* ---------- ARCH DIVIDERS ---------- */
+  .arch-divider{ width:100%; display:flex; justify-content:center; position:relative; z-index:3; }
+  .arch-divider svg{ display:block; width:100%; height:auto; }
+
+  /* ---------- TICKET / OVERVIEW STRIP ---------- */
+  .overview{
+    background:var(--cream);
+    padding:5rem 1.5rem 4rem;
+  }
+  .overview-inner{
+    max-width:960px; margin:0 auto;
+  }
+  .overview h2{
+    text-align:center; font-size:clamp(2rem,5vw,2.8rem); margin-bottom:0.6rem;
+  }
+  .overview-sub{
+    text-align:center; opacity:0.75; max-width:52ch; margin:0 auto 3rem; font-size:0.98rem; line-height:1.6;
+  }
+
+  .ticket{
+    display:grid;
+    grid-template-columns:1fr 1fr 1fr;
+    border:1px solid rgba(58,42,28,0.25);
+    border-radius:4px;
+    overflow:hidden;
+    position:relative;
+    background:#fff9ec;
+  }
+  .ticket::before, .ticket::after{
+    content:''; position:absolute; top:50%; width:22px; height:22px; border-radius:50%;
+    background:var(--cream); transform:translateY(-50%);
+  }
+  .ticket::before{ left:calc(33.33% - 11px); }
+  .ticket::after{ left:calc(66.66% - 11px); }
+  .ticket-seg{ padding:1.8rem 1.6rem; position:relative; }
+  .ticket-seg + .ticket-seg{ border-left:1px dashed rgba(58,42,28,0.3); }
+  .ticket-label{ font-family:'JetBrains Mono', monospace; font-size:0.62rem; letter-spacing:0.15em; text-transform:uppercase; opacity:0.55; margin-bottom:0.5rem;}
+  .ticket-value{ font-family:'Cormorant Garamond', serif; font-size:1.7rem; font-weight:700; line-height:1.15; }
+  .ticket-sub{ font-size:0.82rem; opacity:0.7; margin-top:0.35rem; }
+
+  .route-strip{
+    margin-top:2.2rem; display:flex; align-items:center; justify-content:center; flex-wrap:wrap; gap:0.5rem;
+    font-family:'JetBrains Mono', monospace; font-size:0.72rem; text-transform:uppercase; letter-spacing:0.06em; opacity:0.75;
+  }
+  .route-node{ padding:0.35rem 0.8rem; border:1px solid rgba(58,42,28,0.3); border-radius:20px; }
+  .route-arrow{ opacity:0.5; }
+
+  .transport-compare{
+    margin-top:3rem; display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:1.2rem;
+  }
+  .t-card{
+    border:1px solid rgba(58,42,28,0.2); border-radius:6px; padding:1.4rem 1.5rem; background:#fff9ec;
+  }
+  .t-card.chosen{ border-color:var(--terracotta); box-shadow:0 0 0 1px var(--terracotta) inset; }
+  .t-card h4{ font-family:'Cormorant Garamond',serif; font-size:1.25rem; margin-bottom:0.4rem; display:flex; align-items:center; gap:0.5rem;}
+  .t-card .badge{ font-family:'JetBrains Mono',monospace; font-size:0.58rem; letter-spacing:0.1em; text-transform:uppercase; background:var(--terracotta); color:#fff; padding:0.15rem 0.5rem; border-radius:20px;}
+  .t-card p{ font-size:0.86rem; line-height:1.5; opacity:0.8; margin-top:0.4rem;}
+  .t-card .cost{ font-family:'JetBrains Mono',monospace; font-size:0.78rem; margin-top:0.7rem; opacity:0.65;}
+
+  /* ---------- DAY SECTIONS ---------- */
+  .day{ position:relative; padding:6rem 1.5rem 5rem; }
+  .day-header{ max-width:900px; margin:0 auto 3.5rem; text-align:center; }
+  .day-number{ font-family:'JetBrains Mono', monospace; font-size:0.72rem; letter-spacing:0.32em; text-transform:uppercase; opacity:0.65; margin-bottom:0.7rem; }
+  .day-title{ font-size:clamp(2.2rem, 5.6vw, 3.8rem); line-height:1.05; }
+  .day-date{ font-family:'JetBrains Mono', monospace; font-size:0.82rem; margin-top:0.55rem; opacity:0.7; }
+  .day-desc{ max-width:58ch; margin:1.3rem auto 0; font-size:1rem; line-height:1.6; opacity:0.85; }
+
+  .arc-wrap{ max-width:760px; margin:2.4rem auto 0; position:relative; height:70px; }
+  .arc-wrap svg{ width:100%; height:100%; overflow:visible; }
+
+  .timeline{ max-width:820px; margin:0 auto; position:relative; }
+  .timeline::before{
+    content:''; position:absolute; left:110px; top:0; bottom:0; width:1px;
+    background:linear-gradient(180deg, transparent, currentColor 8%, currentColor 92%, transparent); opacity:0.25;
+  }
+  .event{ position:relative; display:grid; grid-template-columns:90px 1fr; gap:1.5rem; padding:1.2rem 0; }
+  .event-time{ font-family:'JetBrains Mono', monospace; font-size:0.8rem; text-align:right; padding-top:0.15rem; opacity:0.8; white-space:nowrap; }
+  .event-dot{ position:absolute; left:106px; top:1.5rem; width:9px; height:9px; border-radius:50%; background:currentColor; box-shadow:0 0 0 4px var(--cream); }
+  .event-body{ padding-left:2.1rem; }
+  .event-title{ font-family:'Cormorant Garamond', serif; font-weight:600; font-size:1.3rem; margin-bottom:0.3rem; }
+  .event-text{ font-size:0.94rem; line-height:1.55; opacity:0.82; max-width:54ch; }
+  .event-list{ margin-top:0.5rem; padding-left:1.1rem; opacity:0.85; font-size:0.92rem; line-height:1.6;}
+  .tag{
+    display:inline-block; font-family:'JetBrains Mono', monospace; font-size:0.6rem; letter-spacing:0.1em;
+    text-transform:uppercase; padding:0.14rem 0.5rem; border-radius:20px; margin-left:0.55rem; vertical-align:middle;
+    border:1px solid currentColor; opacity:0.7;
+  }
+
+  /* DAY 0 - travel night */
+  #day0{ background:linear-gradient(180deg, #0F0A18 0%, var(--night-deep) 100%); color:var(--sand); padding:4.5rem 1.5rem; }
+  #day0 .day-number, #day0 .day-date{ color:var(--gold); }
+  #day0 .timeline{ color:var(--gold); }
+  #day0 .event-time{ color:var(--sand-deep); }
+  #day0 .event-title{ color:#FBF0D8; }
+  #day0 .day-desc{ color:var(--sand); opacity:0.75;}
+
+  /* DAY 1 - night desert camp */
+  #day1{ background:linear-gradient(180deg, var(--night-deep) 0%, var(--night) 55%, #2A1A38 100%); color:var(--sand); }
+  #day1 .day-number, #day1 .day-date{ color:var(--gold); }
+  #day1 .event-time{ color:var(--sand-deep); }
+  #day1 .timeline{ color:var(--gold); }
+  #day1 .event-title{ color:#FBF0D8; }
+
+  .stars{
+    position:absolute; inset:0;
+    background-image:
+      radial-gradient(1.5px 1.5px at 20% 30%, #fff, transparent),
+      radial-gradient(1px 1px at 65% 15%, #fff, transparent),
+      radial-gradient(1.5px 1.5px at 80% 55%, #fff, transparent),
+      radial-gradient(1px 1px at 40% 70%, #fff, transparent),
+      radial-gradient(1.5px 1.5px at 90% 80%, #fff, transparent),
+      radial-gradient(1px 1px at 10% 85%, #fff, transparent),
+      radial-gradient(1px 1px at 55% 45%, #fff, transparent);
+    opacity:0.5; pointer-events:none;
+  }
+
+  /* DAY 2 - golden city + evening scooters */
+  #day2{ background:linear-gradient(180deg, #F1E2B8 0%, #ECD8A6 100%); color:var(--ink); }
+  #day2 .timeline{ color:var(--terracotta); }
+  #day2 .event-time{ color:var(--maroon); }
+
+  /* DAY 3 - soft dawn departure */
+  #day3{ background:linear-gradient(180deg, #FBF4E4 0%, #F3E6D0 100%); color:var(--ink); }
+  #day3 .timeline{ color:var(--maroon); }
+  #day3 .event-time{ color:var(--terracotta); }
+
+  /* ---------- FOOD TRAIL ---------- */
+  .food{
+    background:#221226; color:var(--sand); padding:5.5rem 1.5rem;
+  }
+  .food h2{ text-align:center; color:var(--gold); font-size:clamp(2rem,5vw,2.8rem); }
+  .food-sub{ text-align:center; opacity:0.7; max-width:52ch; margin:0.7rem auto 3rem; font-size:0.95rem; line-height:1.6;}
+  .food-table{ max-width:820px; margin:0 auto 3rem; width:100%; border-collapse:collapse; font-size:0.92rem;}
+  .food-table th{
+    font-family:'JetBrains Mono', monospace; text-transform:uppercase; letter-spacing:0.08em; font-size:0.68rem;
+    text-align:left; padding:0.7rem 0.8rem; border-bottom:1px solid rgba(212,175,55,0.4); color:var(--gold); opacity:0.9;
+  }
+  .food-table td{ padding:0.75rem 0.8rem; border-bottom:1px solid rgba(255,255,255,0.08); opacity:0.9;}
+  .food-table tr:last-child td{ border-bottom:none;}
+
+  .street-food{
+    max-width:820px; margin:0 auto; text-align:center;
+  }
+  .street-food h3{ font-family:'Cormorant Garamond',serif; font-size:1.4rem; color:var(--sand-deep); margin-bottom:1rem;}
+  .chip-row{ display:flex; flex-wrap:wrap; gap:0.6rem; justify-content:center; }
+  .chip{
+    font-family:'JetBrains Mono', monospace; font-size:0.72rem; padding:0.4rem 0.9rem; border:1px solid rgba(212,175,55,0.4);
+    border-radius:20px; opacity:0.85;
+  }
+
+  /* ---------- HIDDEN GEMS ---------- */
+  .gems{ background:var(--sand); padding:5.5rem 1.5rem; }
+  .gems h2{ text-align:center; font-size:clamp(2rem,5vw,2.8rem); color:var(--ink);}
+  .gems-sub{ text-align:center; opacity:0.75; max-width:52ch; margin:0.7rem auto 3rem; font-size:0.95rem; line-height:1.6;}
+  .gems-grid{
+    max-width:960px; margin:0 auto; display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:1.1rem;
+  }
+  .gem-card{
+    background:#FBF4E4; border:1px solid rgba(58,42,28,0.15); border-radius:6px; padding:1.3rem 1.4rem;
+    display:flex; gap:0.9rem; align-items:flex-start;
+  }
+  .gem-check{ color:var(--terracotta); font-family:'Cormorant Garamond',serif; font-weight:700; font-size:1.3rem; line-height:1;}
+  .gem-card h4{ font-family:'Cormorant Garamond',serif; font-size:1.15rem; margin-bottom:0.25rem;}
+  .gem-card p{ font-size:0.85rem; opacity:0.75; line-height:1.5;}
+
+  /* ---------- BUDGET LEDGER ---------- */
+  .budget{ background:var(--night-deep); color:var(--sand); padding:5.5rem 1.5rem; }
+  .budget h2{ text-align:center; color:var(--gold); font-size:clamp(2rem,5vw,2.8rem);}
+  .budget-sub{ text-align:center; opacity:0.7; max-width:50ch; margin:0.7rem auto 3rem; font-size:0.95rem;}
+  .ledger{
+    max-width:560px; margin:0 auto; background:#1B1026; border:1px solid rgba(212,175,55,0.25); border-radius:6px; padding:2rem 2rem 1.6rem;
+  }
+  .ledger-row{
+    display:flex; justify-content:space-between; padding:0.65rem 0; border-bottom:1px dashed rgba(212,175,55,0.25);
+    font-size:0.92rem;
+  }
+  .ledger-row span:first-child{ opacity:0.8; }
+  .ledger-row span:last-child{ font-family:'JetBrains Mono', monospace; }
+  .ledger-total{
+    display:flex; justify-content:space-between; padding-top:1.1rem; margin-top:0.4rem;
+    font-family:'Cormorant Garamond', serif; font-size:1.5rem; font-weight:700; color:var(--gold);
+  }
+  .ledger-note{ text-align:center; font-size:0.78rem; opacity:0.6; margin-top:1.2rem; }
+
+  /* ---------- PRACTICAL NOTES ---------- */
+  .logistics{ background:var(--maroon); color:#FBF0DE; padding:4.5rem 1.5rem; text-align:center; }
+  .logistics h2{ font-size:clamp(1.8rem,4vw,2.6rem); margin-bottom:2.2rem; }
+  .logi-grid{ max-width:960px; margin:0 auto; display:grid; grid-template-columns:repeat(auto-fit, minmax(210px,1fr)); gap:1.6rem; text-align:left; }
+  .logi-card{ border:1px solid rgba(251,240,222,0.3); border-radius:6px; padding:1.3rem 1.4rem; }
+  .logi-card h3{ font-size:1.05rem; margin-bottom:0.45rem; color:#FCEBC7;}
+  .logi-card p{ font-size:0.85rem; line-height:1.5; opacity:0.85;}
+
+  footer{
+    background:var(--night); color:var(--sand); text-align:center; padding:2.4rem 1.5rem;
+    font-family:'JetBrains Mono', monospace; font-size:0.68rem; letter-spacing:0.12em; text-transform:uppercase; opacity:0.6;
+  }
+
+  @media (max-width:700px){
+    .ticket{ grid-template-columns:1fr; }
+    .ticket-seg + .ticket-seg{ border-left:none; border-top:1px dashed rgba(58,42,28,0.3);}
+    .ticket::before, .ticket::after{ display:none; }
+  }
+  @media (max-width:600px){
+    .timeline::before{ left:70px; }
+    .event{ grid-template-columns:60px 1fr; gap:1rem; }
+    .event-dot{ left:66px; }
+    .event-body{ padding-left:1.1rem; }
+    .food-table{ font-size:0.8rem; }
+    .food-table th, .food-table td{ padding:0.55rem 0.4rem;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .hero .sun, .scroll-cue{ animation:none; }
+  }
+</style>
+</head>
+<body>
+
+  <!-- ================= HERO ================= -->
+  <section class="hero">
+    <div class="stars" style="opacity:0.28;"></div>
+    <div class="dunes back"></div>
+    <div class="sun"></div>
+    <div class="dunes"></div>
+
+    <p class="hero-eyebrow">Five friends · one desert crossing</p>
+    <h1>Jais<em>al</em>mer</h1>
+    <p class="hero-sub">The Golden City, reordered for real life — a full night in the dunes, a full day in the fort, and a last morning that isn't a scramble.</p>
+
+    <div class="hero-route">
+      <span>Ahmedabad</span><span class="dash"></span><span>Jaisalmer</span>
+    </div>
+
+    <div class="hero-dates">
+      <span><strong>10 Jul</strong>Night travel</span>
+      <span><strong>11 Jul</strong>Desert Camp</span>
+      <span><strong>12 Jul</strong>Fort City</span>
+      <span><strong>13 Jul</strong>Departure</span>
+    </div>
+
+    <p class="scroll-cue">↓ scroll the plan</p>
+  </section>
+
+  <div class="arch-divider" style="color:var(--cream);">
+    <svg viewBox="0 0 1440 80" preserveAspectRatio="none"><path fill="currentColor" d="M0,80 L0,40 Q720,-40 1440,40 L1440,80 Z"/></svg>
+  </div>
+
+  <!-- ================= OVERVIEW / TICKET ================= -->
+  <section class="overview">
+    <div class="overview-inner">
+      <h2>The Plan, Reordered</h2>
+      <p class="overview-sub">The old plan left day three rushed — checking out of the desert, driving back, and barely any time before a 3 PM departure. Flipping the last two nights fixes that: sleep in the desert first, sleep in the city last, and let the final morning actually be relaxed.</p>
+
+      <div class="ticket">
+        <div class="ticket-seg">
+          <div class="ticket-label">Group</div>
+          <div class="ticket-value">5 Friends</div>
+          <div class="ticket-sub">Travelling together, one budget</div>
+        </div>
+        <div class="ticket-seg">
+          <div class="ticket-label">Duration</div>
+          <div class="ticket-value">10–13 July</div>
+          <div class="ticket-sub">3 nights, incl. overnight travel in</div>
+        </div>
+        <div class="ticket-seg">
+          <div class="ticket-label">Total Budget</div>
+          <div class="ticket-value">≈ ₹38,000</div>
+          <div class="ticket-sub">For all five, all-inclusive</div>
+        </div>
+      </div>
+
+      <div class="route-strip">
+        <div class="route-node">10 Jul · Ahmedabad</div>
+        <span class="route-arrow">→</span>
+        <div class="route-node">11 Jul · Desert Camp</div>
+        <span class="route-arrow">→</span>
+        <div class="route-node">12 Jul · Hotel Tokyo Palace</div>
+        <span class="route-arrow">→</span>
+        <div class="route-node">13 Jul · Depart 2:30–3 PM</div>
+      </div>
+
+      <div class="transport-compare">
+        <div class="t-card chosen">
+          <h4>11 July <span class="badge">Self-Drive</span></h4>
+          <p>Swift Dzire, self-driven, ₹2,500 for 12 hours. Covers Kuldhara, Khaba Fort, Sam Dunes, and the desert camp — no waiting on a driver, real air conditioning for the drive out.</p>
+          <p class="cost">Fuel: ~6L for 110 km ≈ ₹600–700</p>
+        </div>
+        <div class="t-card chosen">
+          <h4>12 Eve – 13 Morning <span class="badge">3 Activas</span></h4>
+          <p>Rented after checking into Hotel Tokyo Palace, kept until the morning of the 13th. Best for the fort's narrow lanes, Gadisar Lake, and the markets — easy parking, fast, no negotiating fares.</p>
+          <p class="cost">Rental ≈ ₹1,800–2,400 · Petrol ≈ ₹150–250</p>
+        </div>
+        <div class="t-card">
+          <h4>Considered &amp; Skipped</h4>
+          <p><strong>3 Activas for the whole trip</strong> — too tiring in 42–45°C heat over the long desert stretch, no luggage space, one rider always alone.</p>
+          <p><strong>Autos for the city leg</strong> — workable (~₹1,200–2,000 for two autos) but slower, with waiting and negotiating built in.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="arch-divider" style="color:#0F0A18;">
+    <svg viewBox="0 0 1440 80" preserveAspectRatio="none"><path fill="currentColor" d="M0,80 L0,40 Q720,-40 1440,40 L1440,80 Z"/></svg>
+  </div>
+
+  <!-- ================= DAY 0 ================= -->
+  <section class="day" id="day0">
+    <div class="day-header">
+      <div class="day-number">Night Before · Chapter 0</div>
+      <h2 class="day-title" style="color:#FBF0D8;">The Journey In</h2>
+      <div class="day-date mono">10 July, Night</div>
+      <p class="day-desc">Ahmedabad to Jaisalmer, overnight — you sleep through the distance and wake up in the desert.</p>
+    </div>
+    <div class="timeline">
+      <div class="event">
+        <div class="event-time">Night</div>
+        <div class="event-dot"></div>
+        <div class="event-body">
+          <div class="event-title">Overnight travel to Jaisalmer</div>
+          <p class="event-text">Ahmedabad → Jaisalmer. Get what rest you can — day one starts the moment you arrive.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="arch-divider" style="color:var(--night-deep);">
+    <svg viewBox="0 0 1440 80" preserveAspectRatio="none"><path fill="currentColor" d="M0,80 L0,40 Q720,-40 1440,40 L1440,80 Z"/></svg>
+  </div>
+
+  <!-- ================= DAY 1 ================= -->
+  <section class="day" id="day1">
+    <div class="stars"></div>
+    <div class="day-header">
+      <div class="day-number">Day One · Chapter I</div>
+      <h2 class="day-title">Arrival &amp; the Desert Camp</h2>
+      <div class="day-date mono">11 July</div>
+      <p class="day-desc">Self-drive out past two hidden ruins, then into the dunes for camels, sunset, and a night of fire and stars.</p>
+
+      <div class="arc-wrap">
+        <svg viewBox="0 0 760 70">
+          <path d="M10,65 Q380,-25 750,65" fill="none" stroke="#D4AF37" stroke-width="1" stroke-dasharray="3,5" opacity="0.5"/>
+          <circle cx="80" cy="45" r="4" fill="#D4AF37"/>
+          <circle cx="230" cy="15" r="4" fill="#D4AF37"/>
+          <circle cx="420" cy="8" r="4" fill="#D4AF37"/>
+          <circle cx="600" cy="25" r="5" fill="#F1E2B8"/>
+          <circle cx="700" cy="50" r="5" fill="#F1E2B8"/>
+        </svg>
+      </div>
+    </div>
+
+    <div class="timeline">
+      <div class="event">
+        <div class="event-time">12:00 PM</div>
+        <div class="event-dot"></div>
+        <div class="event-body">
+          <div class="event-title">Reach Jaisalmer</div>
+          <p class="event-text">Check luggage at Hotel Tokyo Palace, or take an early check-in if it's available, before heading out.</p>
+        </div>
+      </div>
+      <div class="event">
+        <div class="event-time">12:30 PM</div>
+        <div class="event-dot"></div>
+        <div class="event-body">
+          <div class="event-title">Pick up the Swift Dzire<span class="tag">self-drive</span></div>
+          <p class="event-text">₹2,500 for 12 hours — yours until tomorrow morning.</p>
+        </div>
+      </div>
+      <div class="event">
+        <div class="event-time">1:00 PM</div>
+        <div class="event-dot"></div>
+        <div class="event-body">
+          <div class="event-title">Lunch at The Trio<span class="tag">vegetarian</span></div>
+          <ul class="event-list">
+            <li>Dal Baati Churma</li>
+            <li>Gatte ki Sabzi</li>
+            <li>Ker Sangri</li>
+            <li>Missi Roti &amp; Chaas</li>
+          </ul>
+        </div>
+      </div>
+      <div class="event">
+        <div class="event-time">2:30 PM</div>
+        <div class="event-dot"></div>
+        <div class="event-body">
+          <div class="event-title">Drive towards Sam</div>
+          <p class="event-text">On the way, two hidden gems that most tourists skip entirely.</p>
+        </div>
+      </div>
+      <div class="event">
+        <div class="event-time">En Route</div>
+        <div class="event-dot"></div>
+        <div class="event-body">
+          <div class="event-title">Kuldhara <span class="tag">hidden gem</span></div>
+          <p class="event-text">The abandoned village of legend, best at sunset light.</p>
+        </div>
+      </div>
+      <div class="event">
+        <div class="event-time">En Route</div>
+        <div class="event-dot"></div>
+        <div class="event-body">
+          <div class="event-title">Khaba Fort <span class="tag">hidden gem</span></div>
+          <p class="event-text">A quiet hilltop fort with views over the fields and dunes.</p>
+        </div>
+      </div>
+      <div class="event">
+        <div class="event-time">5:30 PM</div>
+        <div class="event-dot"></div>
+        <div class="event-body">
+          <div class="event-title">Reach Sam Sand Dunes</div>
+          <p class="event-text">Camel safari, jeep safari, and sunset over the dunes.</p>
+        </div>
+      </div>
+      <div class="event">
+        <div class="event-time">Night</div>
+        <div class="event-dot"></div>
+        <div class="event-body">
+          <div class="event-title">Desert Camp<span class="tag">deluxe</span></div>
+          <p class="event-text">A deluxe camp with a cultural program and dinner included. Fire, drums, and a sky full of stars.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="arch-divider" style="color:#F1E2B8;">
+    <svg viewBox="0 0 1440 80" preserveAspectRatio="none"><path fill="currentColor" d="M0,80 L0,40 Q720,-40 1440,40 L1440,80 Z"/></svg>
+  </div>
+
+  <!-- ================= DAY 2 ================= -->
+  <section class="day" id="day2">
+    <div class="day-header">
+      <div class="day-number">Day Two · Chapter II</div>
+      <h2 class="day-title">Sunrise, Then the Fort City</h2>
+      <div class="day-date mono">12 July</div>
+      <p class="day-desc">Wake with the desert, return to town, and trade the Dzire for three Activas once you're settled — perfect for the fort's narrow lanes and evening markets.</p>
+
+      <div class="arc-wrap">
+        <svg viewBox="0 0 760 70">
+          <path d="M10,65 Q380,-25 750,65" fill="none" stroke="#C1652F" stroke-width="1" stroke-dasharray="3,5" opacity="0.5"/>
+          <circle cx="60" cy="55" r="4" fill="#C1652F"/>
+          <circle cx="220" cy="12" r="5" fill="#D4AF37"/>
+          <circle cx="400" cy="4" r="5" fill="#D4AF37"/>
+          <circle cx="560" cy="14" r="4" fill="#C1652F"/>
+          <circle cx="700" cy="50" r="4" fill="#7E1E3C"/>
+        </svg>
+      </div>
+    </div>
+
+    <div class="timeline">
+      <div class="event">
+        <div class="event-time">Sunrise</div>
+        <div class="event-dot"></div>
+        <div class="event-body">
+          <div class="event-title">Sunrise in the desert</div>
+          <p class="event-text">Watch the dunes turn gold before the day gets warm.</p>
+        </div>
+      </div>
+      <div class="event">
+        <div class="event-time">Morning</div>
+        <div class="event-dot"></div>
+        <div class="event-body">
+          <div class="event-title">Breakfast at camp, drive back to the city</div>
+          <p class="event-text">Return the Swift Dzire once you're back — its job is done.</p>
+        </div>
+      </div>
+      <div class="event">
+        <div class="event-time">Check-in</div>
+        <div class="event-dot"></div>
+        <div class="event-body">
+          <div class="event-title">Check in to Hotel Tokyo Palace</div>
+          <p class="event-text">Base for the last two nights.</p>
+        </div>
+      </div>
+      <div class="event">
+        <div class="event-time">By Day</div>
+        <div class="event-dot"></div>
+        <div class="event-body">
+          <div class="event-title">City tour<span class="tag">on foot / auto</span></div>
+          <ul class="event-list">
+            <li>Jaisalmer Fort &amp; its Jain Temples</li>
+            <li>Patwon Ki Haveli</li>
+            <li>Salim Singh Ki Haveli</li>
+            <li>Nathmal Ki Haveli</li>
+          </ul>
+        </div>
+      </div>
+      <div class="event">
+        <div class="event-time">Lunch</div>
+        <div class="event-dot"></div>
+        <div class="event-body">
+          <div class="event-title">Saffron</div>
+          <ul class="event-list">
+            <li>Paneer Lababdar</li>
+            <li>Garlic Naan</li>
+            <li>Dal Fry</li>
+          </ul>
+        </div>
+      </div>
+      <div class="event">
+        <div class="event-time">Afternoon</div>
+        <div class="event-dot"></div>
+        <div class="event-body">
+          <div class="event-title">Rent 3 Activas<span class="tag">until 13 morning</span></div>
+          <p class="event-text">Picked up once you're settled at Hotel Tokyo Palace. Easy parking near the fort, the havelis, and Gadisar Lake — you'll just walk the last stretch in.</p>
+        </div>
+      </div>
+      <div class="event">
+        <div class="event-time">Evening</div>
+        <div class="event-dot"></div>
+        <div class="event-body">
+          <div class="event-title">Bhatia Market &amp; Sadar Bazaar<span class="tag">shopping</span></div>
+          <ul class="event-list">
+            <li>Leather items &amp; camel leather wallets</li>
+            <li>Puppets</li>
+            <li>Silver jewellery</li>
+            <li>Fossil stone</li>
+          </ul>
+        </div>
+      </div>
+      <div class="event">
+        <div class="event-time">Dinner</div>
+        <div class="event-dot"></div>
+        <div class="event-body">
+          <div class="event-title">Jaisal Italy<span class="tag">rooftop</span></div>
+          <p class="event-text">Pizza and pasta with a rooftop view of the fort — a change of pace for the last full night.</p>
+        </div>
+      </div>
+      <div class="event">
+        <div class="event-time">Overnight</div>
+        <div class="event-dot"></div>
+        <div class="event-body">
+          <div class="event-title">Stay at Hotel Tokyo Palace</div>
+          <p class="event-text">Scooters stay parked outside, ready for the morning.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="arch-divider" style="color:#FBF4E4;">
+    <svg viewBox="0 0 1440 80" preserveAspectRatio="none"><path fill="currentColor" d="M0,80 L0,40 Q720,-40 1440,40 L1440,80 Z"/></svg>
+  </div>
+
+  <!-- ================= DAY 3 ================= -->
+  <section class="day" id="day3">
+    <div class="day-header">
+      <div class="day-number">Day Three · Chapter III</div>
+      <h2 class="day-title">A Slow Morning, Then Departure</h2>
+      <div class="day-date mono">13 July</div>
+      <p class="day-desc">The Activas earn their keep one last time — breakfast, a lake, a sunrise chhatri, and a last walk through the lanes, all before an unhurried 2:30 PM departure.</p>
+
+      <div class="arc-wrap">
+        <svg viewBox="0 0 760 70">
+          <path d="M10,45 Q380,-15 750,45" fill="none" stroke="#7E1E3C" stroke-width="1" stroke-dasharray="3,5" opacity="0.45"/>
+          <circle cx="120" cy="28" r="5" fill="#D4AF37"/>
+          <circle cx="330" cy="8" r="5" fill="#D4AF37"/>
+          <circle cx="560" cy="20" r="4" fill="#C1652F"/>
+          <circle cx="700" cy="38" r="4" fill="#7E1E3C"/>
+        </svg>
+      </div>
+    </div>
+
+    <div class="timeline">
+      <div class="event">
+        <div class="event-time">Breakfast</div>
+        <div class="event-dot"></div>
+        <div class="event-body">
+          <div class="event-title">Cafe The Kaku</div>
+          <ul class="event-list">
+            <li>Masala tea</li>
+            <li>Stuffed paratha</li>
+            <li>Sandwich</li>
+          </ul>
+        </div>
+      </div>
+      <div class="event">
+        <div class="event-time">Morning</div>
+        <div class="event-dot"></div>
+        <div class="event-body">
+          <div class="event-title">Gadisar Lake</div>
+          <p class="event-text">Boat ride and photography — best in the early, quiet light.</p>
+        </div>
+      </div>
+      <div class="event">
+        <div class="event-time">Morning</div>
+        <div class="event-dot"></div>
+        <div class="event-body">
+          <div class="event-title">Vyas Chhatri <span class="tag">hidden gem</span></div>
+          <p class="event-text">A sunrise-lit cluster of cenotaphs most visitors never make it to.</p>
+        </div>
+      </div>
+      <div class="event">
+        <div class="event-time">Late Morning</div>
+        <div class="event-dot"></div>
+        <div class="event-body">
+          <div class="event-title">Old lanes behind the Fort &amp; handicraft workshops</div>
+          <p class="event-text">A last unhurried wander through residential lanes and small local workshops.</p>
+        </div>
+      </div>
+      <div class="event">
+        <div class="event-time">12:30 PM</div>
+        <div class="event-dot"></div>
+        <div class="event-body">
+          <div class="event-title">Lunch at Pleasant Haveli Rooftop Restaurant</div>
+          <p class="event-text">Rajasthani thali — a fitting last meal in the city.</p>
+        </div>
+      </div>
+      <div class="event">
+        <div class="event-time">Before 2:30 PM</div>
+        <div class="event-dot"></div>
+        <div class="event-body">
+          <div class="event-title">Return the Activas<span class="tag">logistics</span></div>
+          <p class="event-text">Wrap up the rental with plenty of time to spare.</p>
+        </div>
+      </div>
+      <div class="event">
+        <div class="event-time">2:30 PM</div>
+        <div class="event-dot"></div>
+        <div class="event-body">
+          <div class="event-title">Depart Jaisalmer</div>
+          <p class="event-text">Relaxed, on schedule, and not rushed — exactly the point of the reorder.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FOOD TRAIL ================= -->
+  <section class="food">
+    <h2 class="display">The Vegetarian Trail</h2>
+    <p class="food-sub">Every sit-down meal across the three days, mapped out so you're never wondering where to eat.</p>
+
+    <table class="food-table">
+      <tr><th>Meal</th><th>Place</th><th>Must-Try</th></tr>
+      <tr><td>Breakfast</td><td>Cafe The Kaku</td><td>Stuffed paratha</td></tr>
+      <tr><td>Breakfast</td><td>1st Gate Home Fusion</td><td>Pancakes</td></tr>
+      <tr><td>Lunch</td><td>The Trio</td><td>Dal Baati Churma</td></tr>
+      <tr><td>Lunch</td><td>Saffron</td><td>North Indian thali fare</td></tr>
+      <tr><td>Lunch</td><td>Pleasant Haveli Rooftop</td><td>Rajasthani Thali</td></tr>
+      <tr><td>Dinner</td><td>Jaisal Italy</td><td>Wood-fired pizza, rooftop fort view</td></tr>
+      <tr><td>Dinner</td><td>Hotel Tokyo Palace Rooftop</td><td>Rooftop dinner</td></tr>
+    </table>
+
+    <div class="street-food">
+      <h3>Street Food Worth the Detour</h3>
+      <div class="chip-row">
+        <span class="chip">Dahi Puri — Prabhu Tea Stall area</span>
+        <span class="chip">Pyaz Kachori — near Hanuman Circle</span>
+        <span class="chip">Mirchi Vada — Shree Jee Snacks</span>
+        <span class="chip">Rabri</span>
+        <span class="chip">Kulfi Falooda</span>
+        <span class="chip">Makhaniya Lassi</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= HIDDEN GEMS ================= -->
+  <section class="gems">
+    <h2 class="display">Off the Usual Path</h2>
+    <p class="gems-sub">Already folded into the days above — the places most visitors drive straight past.</p>
+    <div class="gems-grid">
+      <div class="gem-card"><span class="gem-check">✓</span><div><h4>Kuldhara at sunset</h4><p>An abandoned village, quieter and stranger in low light.</p></div></div>
+      <div class="gem-card"><span class="gem-check">✓</span><div><h4>Khaba Fort</h4><p>A hilltop ruin with far fewer visitors than the main fort.</p></div></div>
+      <div class="gem-card"><span class="gem-check">✓</span><div><h4>Vyas Chhatri at sunrise</h4><p>Golden-hour cenotaphs, easy to miss if you sleep in.</p></div></div>
+      <div class="gem-card"><span class="gem-check">✓</span><div><h4>Gadisar Lake, early morning</h4><p>Still water, soft light, no crowds yet.</p></div></div>
+      <div class="gem-card"><span class="gem-check">✓</span><div><h4>Residential lanes inside the Fort</h4><p>Walk past the shops into the lanes people actually live on.</p></div></div>
+      <div class="gem-card"><span class="gem-check">✓</span><div><h4>Desert National Park road</h4><p>If there's a spare hour, the drive itself is worth it.</p></div></div>
+    </div>
+  </section>
+
+  <!-- ================= BUDGET LEDGER ================= -->
+  <section class="budget">
+    <h2 class="display">Budget — For All Five</h2>
+    <p class="budget-sub">Approximate, but built to fit comfortably inside ₹38,000 total.</p>
+    <div class="ledger">
+      <div class="ledger-row"><span>Hotel Tokyo Palace</span><span>₹5,500</span></div>
+      <div class="ledger-row"><span>Luxury Desert Camp</span><span>₹8,500</span></div>
+      <div class="ledger-row"><span>Swift Dzire rental</span><span>₹2,500</span></div>
+      <div class="ledger-row"><span>Fuel</span><span>₹700</span></div>
+      <div class="ledger-row"><span>Food</span><span>₹8,000</span></div>
+      <div class="ledger-row"><span>Entry tickets</span><span>₹2,500</span></div>
+      <div class="ledger-row"><span>Shopping</span><span>₹5,000</span></div>
+      <div class="ledger-row"><span>Emergency buffer</span><span>₹5,300</span></div>
+      <div class="ledger-total"><span>Total</span><span>≈ ₹38,000</span></div>
+      <p class="ledger-note">3 Activas for the city leg (~₹2,000–2,650 incl. petrol) fit inside the food &amp; shopping buffers above.</p>
+    </div>
+  </section>
+
+  <!-- ================= PRACTICAL NOTES ================= -->
+  <section class="logistics">
+    <h2 class="display">Good to Know</h2>
+    <div class="logi-grid">
+      <div class="logi-card">
+        <h3>Parking</h3>
+        <p>Not a problem. Park just outside Jaisalmer Fort (vehicles aren't allowed deep inside), Patwon Ki Haveli, and Gadisar Lake, then walk a few minutes in.</p>
+      </div>
+      <div class="logi-card">
+        <h3>Heat</h3>
+        <p>Expect 42–45°C. It's the main reason the long desert leg (11 July) is a self-driven car, not scooters.</p>
+      </div>
+      <div class="logi-card">
+        <h3>Wine Shops</h3>
+        <p>If you're buying alcohol, licensed outlets include the Ganganagar Rajasthan State Liquor Shop and the English Wine &amp; Beer Shop near Hanuman Circle. Typically open 10 AM–10 PM, though hours can shift with local rules and holidays.</p>
+      </div>
+      <div class="logi-card">
+        <h3>Vehicle Handover</h3>
+        <p>Swift Dzire returned on the morning of 12 July once you're back in the city. The 3 Activas are picked up that afternoon and returned before 2:30 PM on the 13th.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    Jaisalmer · 10 – 13 July · Five Friends, One Desert
+  </footer>
+
+</body>
+</html>
